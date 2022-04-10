@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class InputManager : MonoBehaviour
+public class InputManager : GameBehaviour
 {
 
     private void Update()
@@ -16,12 +16,12 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            EventManager.Instance.OnInputDetected?.Invoke(Input.GetAxis("Mouse X"));
+            EventManager.OnInputDetected?.Invoke(Input.GetAxis("Mouse X"));
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            EventManager.Instance.OnInputDetected?.Invoke(0f);
+            EventManager.OnInputDetected?.Invoke(0f);
         }
 
         
@@ -35,12 +35,12 @@ public class InputManager : MonoBehaviour
             if (touch.phase == TouchPhase.Moved)
             {
                 var deltaInput = touch.deltaPosition / (Screen.width * touch.deltaTime);
-                EventManager.Instance.OnInputDetected?.Invoke(deltaInput.x);
+                EventManager.OnInputDetected?.Invoke(deltaInput.x);
             }
 
             if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Stationary)
             {
-                EventManager.Instance.OnInputDetected?.Invoke(0f);
+                EventManager.OnInputDetected?.Invoke(0f);
             }
             
         }

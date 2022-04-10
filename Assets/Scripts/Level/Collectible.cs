@@ -17,6 +17,6 @@ public class Collectible : MonoBehaviour
 
     private void UpdateScore()
     {
-        //scoremanager....
+        EventManager.OnScoreUpdated?.Invoke(scoreWorth);
     }
 }
