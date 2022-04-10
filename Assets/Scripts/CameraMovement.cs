@@ -1,23 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private Transform player;
+    [SerializeField] private Vector3 offset;
 
-    private Vector3 offset;
     private float smoothSpeed = 6f;
+    private Vector3 initialPos;
 
     private void Start()
     {
-        offset = transform.position - player.position;
+        if (player == null) player = GameObject.FindGameObjectWithTag("Player").transform;
+        if (player == null) Debug.LogError("Player not assigned");
+        initialPos = transform.position;
+
     }
 
     private void LateUpdate()
     {
-        Vector3 desiredPosition = player.position + offset;
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
+        var trailPosition = player.position + offset;
+        var desiredPosition = new Vector3(initialPos.x, trailPosition.y, trailPosition.z);
+        var smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
+
         transform.position = smoothedPosition;
     }
 }
