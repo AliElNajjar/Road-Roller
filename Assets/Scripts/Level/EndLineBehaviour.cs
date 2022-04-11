@@ -6,6 +6,8 @@ public class EndLineBehaviour : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            AudioManager.Instance.PlaySound(AudioManager.Sounds.Won);
+
             EventManager.OnLevelEnd?.Invoke();
         }
 

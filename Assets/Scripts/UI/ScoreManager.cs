@@ -17,6 +17,11 @@ public class ScoreManager : MonoBehaviour
     {
         score += points;
         scoreText.text = string.Format("{0:00}", score);
-        if (score < 0) EventManager.OnLevelEnd?.Invoke();
+        if (score < 0)
+        {
+            EventManager.OnLevelEnd?.Invoke();
+            AudioManager.Instance.PlaySound(AudioManager.Sounds.Lost);
+        }
+            
     }
 }
