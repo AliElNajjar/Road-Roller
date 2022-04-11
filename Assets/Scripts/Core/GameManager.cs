@@ -16,8 +16,7 @@ public class GameManager : Singleton<GameManager>
 
     [HideInInspector] public EventManager.EventGameState OnGameStateChanged;
 
-    private GameState _currentGameState = GameState.Pregame;
-
+    private GameState _currentGameState;
 
     private void Start()
     {
@@ -27,6 +26,8 @@ public class GameManager : Singleton<GameManager>
         EventManager.OnLevelEnd += EndLevel;
         EventManager.OnQuitRequested += QuitGame;
         LoadLevel(prototypeSceneIndex);
+
+        UpdateState(GameState.Pregame);
     }
 
     private void UpdateState(GameState state)
